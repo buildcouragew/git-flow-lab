@@ -9,7 +9,10 @@ on:
     branches: [ "feat/readme-ci" ]
   pull_request:
     branches: [ "feat/readme-ci" ]
-
+    
+permissions:
+  contents: read
+  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -34,3 +37,6 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Check for Usage heading
+        run: grep -Fx '## Usage' README.md
