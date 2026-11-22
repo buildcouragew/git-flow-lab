@@ -4,11 +4,8 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "feat/readme-ci" branch
-  push:
-    branches: [ "feat/readme-ci" ]
   pull_request:
-    branches: [ "feat/readme-ci" ]
+    branches: [master]
     
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -41,6 +38,8 @@ jobs:
 
       - name: Check for Usage heading
         run: grep -Fx '## Usage' README.md
+
+
         
   report-tests:
     runs-on: windows-latest
