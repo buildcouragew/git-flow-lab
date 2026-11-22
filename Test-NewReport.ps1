@@ -25,11 +25,12 @@ try {
 
     # 预览已有文件，保留原内容
     Set-Content -LiteralPath $reportPath -Value 'Keep this content' -NoNewline
-    & $scriptPath -DryRun | Out-Null
-    if ((Get-Content -LiteralPath $reportPath -Raw) -cne 'Keep this content') {
-        throw 'Dry run changed the existing report.'
+    $preview = & $scriptPath -DryRun
+    if ($preview -cne "Would keep existing file: $reportPath") {
+        throw "Unexpected preview for an existing report: $preview"
     }
 
+    
     # 正常执行遇到已有文件，给出提示并保留原内容
     $result = & $scriptPath
     if ($result -cne "Already exists: $reportPath" -or
