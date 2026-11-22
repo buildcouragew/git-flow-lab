@@ -5,7 +5,12 @@ param(
 $path = Join-Path (Get-Location).Path 'report.txt'
 
 if ($DryRun) {
-    Write-Output "Would create: $path"
+    if (Test-Path -LiteralPath $path) {
+        Write-Output "Would keep existing file: $path"
+    } else {
+        Write-Output "Would create: $path"
+    }
+    
     return
 }
 
