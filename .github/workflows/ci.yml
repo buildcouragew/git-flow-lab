@@ -41,3 +41,11 @@ jobs:
 
       - name: Check for Usage heading
         run: grep -Fx '## Usage' README.md
+        
+  report-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run report tests
+        shell: pwsh
+        run: ./Test-NewReport.ps1
